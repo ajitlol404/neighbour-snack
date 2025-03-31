@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{base :: base_head}"></th:block>
+    <script type="module" th:src="@{/javascript/product.js}" defer></script>
+</head>
+
+<body class="vh-100 d-flex flex-column">
+
+    <th:block th:replace="~{admin/admin-base :: admin_base_navbar}"></th:block>
+
+    <div class="container-fluid flex-grow-1 overflow-auto p-3">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4><i class="fa-solid fa-box"></i>&nbsp;Product</h4>
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#product_modal"
+                        id="add_product_btn">
+                        <i class="fa-solid fa-circle-plus"></i>&nbsp;Add Product
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <th:block th:replace="~{fragment/table-fragment :: dynamicTable(
+                    ${ { '#', 'Product Image', 'Name', 'Price', 'In Stock', 'Category', 'Unit Type', 'Created At', 'Updated At', 'Action' } }, 
+                    ${ { '', '', '', '', '', '', '', '', '', '' } },
+                    'product_table'
+                )}">
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="~{fragment/modal-fragment :: product_modal}"></th:block>
+
+    <footer th:replace="~{base :: base_footer}"></footer>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+/* Robot font */
+
+/* @font-face {
+    font-family: "Roboto";
+    src: url("/font/Roboto/Roboto-VariableFont_wdth\,wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/font/Roboto/Roboto-Italic-VariableFont_wdth\,wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+} */
+
+/* Montserrat font */
+
+/* @font-face {
+    font-family: "Montserrat";
+    src: url("/font/Montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("/src/main/resources/static/font/Montserrat/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+} */
+
+/* Inter */
+
+@font-face {
+    font-family: "Inter";
+    src: url("/font/Inter/Inter-VariableFont_opsz\,wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/font/Inter/Inter-Italic-VariableFont_opsz\,wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

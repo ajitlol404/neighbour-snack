@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:fragment="base_head">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>[[${title}]]</title>
+
+        <th:block th:replace="~{base :: base_head_css_js}"></th:block>
+    </th:block>
+
+
+    <th:block th:fragment="base_head_css_js">
+
+        <th:block th:replace="~{base :: csrf_meta}"></th:block>
+
+        <th:block th:replace="~{base :: base_css_js}"></th:block>
+        <script type="module"
+            th:src="@{${#authorization.expression('hasRole(''ADMIN'')')} ? '/javascript/admin-base.js' : '/javascript/base.js'}"
+            defer></script>
+
+    </th:block>
+
+    <th:block th:fragment="csrf_meta">
+        <meta name="_csrf" th:content="${_csrf.token}">
+        <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    </th:block>
+
+    <th:block th:fragment="base_css_js">
+
+        <!-- Style Sheets -->
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/6.7.2/css/all.css}">
+        <link rel="stylesheet" th:href="@{/dataTables/datatables.min.css}">
+        <link rel="stylesheet" th:href="@{/css/base.css}">
+
+        <!-- Scripts -->
+        <script type="module" th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}" defer></script>
+        <script type="module" th:src="@{/webjars/font-awesome/6.7.2/js/all.min.js}" defer></script>
+        <script th:src="@{/dataTables/datatables.min.js}"></script>
+        <script type="module" th:src="@{/webjars/chart.js/4.4.7/dist/chart.umd.js}" defer></script>
+
+    </th:block>
+</head>
+
+<body>
+
+    <nav th:fragment="base_navbar" class="navbar navbar-expand-lg bg-body-tertiary py-3">
+        <div class="container-fluid">
+            <!-- Left: Logo & Brand -->
+            <a class="navbar-brand fw-bold" th:href="@{/}">Neighbour Snack</a>
+
+            <!-- Right: Navbar Toggle for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Center: Search Bar -->
+                <div class="d-flex justify-content-center mx-auto w-50">
+                    <div class="w-75">
+                        <input class="form-control" id="search_input" type="search" placeholder="Search for snacks..."
+                            aria-label="Search" autocomplete="off">
+                    </div>
+                </div>
+
+                <!-- Right: Cart & User Icons (Hidden on Large Screens, Visible in Collapsed Mode) -->
+                <ul class="navbar-nav ms-auto d-lg-none">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            <i class="fas fa-shopping-cart"></i>&nbsp;Cart&nbsp;
+                            <span class="badge bg-danger rounded-pill">0</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/login}" class="btn btn-outline-primary">
+                            <i class="fas fa-user-circle"></i>&nbsp;Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right: Cart & User Icons (Visible on Large Screens) -->
+            <div class="d-none d-lg-flex align-items-center gap-3">
+                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    <i class="fas fa-shopping-cart"></i>&nbsp;Cart&nbsp;
+                    <span class="badge bg-danger rounded-pill">0</span>
+                </button>
+                <a th:href="@{/login}" class="btn btn-outline-primary">
+                    <i class="fas fa-user-circle"></i>&nbsp;Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <footer th:fragment="base_footer" class="py-2 bg-light">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &#169; Neighbour Snack 2024</div>
+                <div>
+                    <a href="javascript:" data-bs-toggle="modal" data-bs-target="#privacy_policy_modal">Privacy
+                        Policy</a>
+                    ·
+                    <a href="javascript:" data-bs-toggle="modal" data-bs-target="#terms_conditions_modal">Terms &amp;
+                        Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

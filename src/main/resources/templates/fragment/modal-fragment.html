@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<body>
+
+    <!-- Signup Modal -->
+    <div th:fragment="signup_modal" class="modal fade" id="signup_modal" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1" aria-labelledby="signup_modal_title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="signup_modal_title"><i class="fa-solid fa-user-plus"></i>&nbsp;Sign
+                        Up</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signup_form" autocomplete="off" novalidate
+                        th:with="nameId='signup_name', emailId='signup_email', passwordId='signup_password'">
+                        <div class="mb-3">
+                            <label th:for="${nameId}" class="form-label">Full Name:</label>
+                            <input type="text" class="form-control" th:id="${nameId}"
+                                placeholder="Enter your full name">
+                            <small class="text-danger text-sm" th:id="|${nameId}_err_msg|"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label th:for="${emailId}" class="form-label">Email:</label>
+                            <input type="email" class="form-control" th:id="${emailId}" placeholder="Enter your email">
+                            <small class="text-danger text-sm" th:id="|${emailId}_err_msg|"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label th:for="${passwordId}" class="form-label">Password:</label>
+                            <input type="password" class="form-control" th:id="${passwordId}"
+                                placeholder="Create a password">
+                            <small class="text-danger text-sm" th:id="|${passwordId}_err_msg|"></small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="signup_form" class="btn btn-primary" id="signup_form_submit_btn"><i
+                            class="fa-solid fa-user-plus"></i>&nbsp;Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div th:fragment="forgot_password_modal" class="modal fade" id="forgot_password_modal" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1" aria-labelledby="forgot_password_modal_title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="forgot_password_modal_title"><i
+                            class="fa-solid fa-key"></i>&nbsp;Forgot Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgot_password_form" autocomplete="off" novalidate
+                        th:with="emailId='forgot_password_email'">
+                        <label th:for="${emailId}" class="form-label">Email:</label>
+                        <input type="email" class="form-control" th:id="${emailId}" placeholder="Enter your email">
+                        <small class="text-danger text-sm" th:id="|${emailId}_err_msg|"></small>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="forgot_password_form" class="btn btn-warning"
+                        id="forgot_password_submit_btn"><i class="fa-solid fa-key"></i>&nbsp;Send Reset
+                        Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="privacy_policy_modal" class="modal fade" id="privacy_policy_modal" tabindex="-1"
+        aria-labelledby="privacy_policy_modal_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5"><i class="fa-solid fa-shield-halved"></i>&nbsp;Privacy Policy</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>1. Introduction</h5>
+                    <p>This Privacy Policy explains how Neighbour Snack collects, uses, and protects your personal
+                        information when you use our platform.</p>
+
+                    <h5>2. Information We Collect</h5>
+                    <p>We collect personal information such as your name, email address, shipping address, payment
+                        details, and browsing behavior.</p>
+
+                    <h5>3. How We Use Your Information</h5>
+                    <p>Your information is used to process orders, improve our services, and communicate with you about
+                        promotions or updates.</p>
+
+                    <h5>4. Data Sharing</h5>
+                    <p>We may share your information with third-party service providers (e.g., delivery partners,
+                        payment gateways) to fulfill your orders.</p>
+
+                    <h5>5. Data Security</h5>
+                    <p>We implement security measures like encryption and secure servers to protect your data.</p>
+
+                    <h5>6. Cookies</h5>
+                    <p>We use cookies to enhance your browsing experience and analyze website traffic.</p>
+
+                    <h5>7. User Rights</h5>
+                    <p>You have the right to access, update, or delete your personal information at any time.</p>
+
+                    <h5>8. Policy Updates</h5>
+                    <p>We may update this policy periodically. Continued use of our platform constitutes acceptance of
+                        the updated policy.</p>
+
+                    <h5>9. Contact Us</h5>
+                    <p>For any privacy-related concerns, please contact us at <a
+                            href="mailto:ns@gmail.com">ns@gmail.com</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:fragment="terms_conditions_modal" class="modal fade" id="terms_conditions_modal" tabindex="-1"
+        aria-labelledby="terms_conditions_modal_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5"><i class="fa-solid fa-file-contract"></i>&nbsp;Terms & Conditions</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>1. Acceptance of Terms</h5>
+                    <p>By using Neighbour Snack, you agree to these Terms & Conditions.</p>
+
+                    <h5>2. Account Registration</h5>
+                    <p>You must provide accurate information when creating an account and are responsible for
+                        maintaining its security.</p>
+
+                    <h5>3. Ordering and Payment</h5>
+                    <p>All orders are subject to product availability. Payment must be made through approved methods.
+                    </p>
+
+                    <h5>4. Delivery</h5>
+                    <p>Delivery times may vary. We are not responsible for delays caused by third-party delivery
+                        services.</p>
+
+                    <h5>5. Returns and Refunds</h5>
+                    <p>Returns and refunds are subject to our Return Policy. Please review it before making a purchase.
+                    </p>
+
+                    <h5>6. User Conduct</h5>
+                    <p>You agree not to use the platform for illegal or fraudulent activities.</p>
+
+                    <h5>7. Intellectual Property</h5>
+                    <p>All content on this platform (e.g., logos, images, text) is the property of Neighbour Snack and
+                        is protected by copyright laws.</p>
+
+                    <h5>8. Limitation of Liability</h5>
+                    <p>Neighbour Snack is not liable for any indirect, incidental, or consequential damages arising from
+                        the use of our platform.</p>
+
+                    <h5>9. Termination</h5>
+                    <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
+
+                    <h5>10. Governing Law</h5>
+                    <p>These terms are governed by the laws of India.</p>
+
+                    <h5>11. Changes to Terms</h5>
+                    <p>We may update these terms at any time. Your continued use of the platform constitutes acceptance
+                        of the changes.</p>
+
+                    <h5>12. Contact Information</h5>
+                    <p>For any questions, please contact us at <a href="mailto:ns@gmail.com">ns@gmail.com</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Category Modal -->
+    <div th:fragment="category_modal" class="modal fade" id="category_modal" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1" aria-labelledby="category_modal_title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="category_modal_title"><i
+                            class="fa-solid fa-circle-plus"></i>&nbsp;Add Category
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="category_form" autocomplete="off" novalidate data-method="POST"
+                        th:with="nameId='category_name', descriptionId='category_description', statusId='category_status'">
+                        <div class="mb-3">
+                            <label th:for="${nameId}" class="form-label">Category Name:<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control text-capitalize" th:id="${nameId}"
+                                placeholder="Enter category name">
+                            <small class="text-danger text-sm" th:id="|${nameId}_err_msg|"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label th:for="${descriptionId}" class="form-label">Description:</label>
+                            <textarea class="form-control" th:id="${descriptionId}"
+                                placeholder="Enter category description"></textarea>
+                            <small class="text-danger text-sm" th:id="|${descriptionId}_err_msg|"></small>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input cursor-pointer" type="checkbox" th:id="${statusId}" checked>
+                            <label class="form-check-label" th:for="${statusId}">Active</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="category_form" class="btn btn-primary" id="category_form_submit_btn"><i
+                            class="fa-solid fa-save"></i>&nbsp;Create Category</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div th:fragment="product_modal" class="modal fade" id="product_modal" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1" aria-labelledby="product_modal_title" aria-hidden="true" th:with="nameId='product_name', descriptionId='product_description', categoryId='product_category', 
+            unitWeightId='product_unit_weight', unitPieceId='product_unit_piece', priceId='price_input', imageId='product_image', 
+            statusId='product_instock_status'">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="product_modal_title">
+                        <i class="fa-solid fa-circle-plus"></i>&nbsp;Add Product
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="product_form" autocomplete="off" novalidate data-method="POST">
+                        <div class="row g-3">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label th:for="${nameId}" class="form-label">Product Name:<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control text-capitalize" th:id="${nameId}"
+                                        placeholder="Enter product name">
+                                    <small class="text-danger" th:id="|${nameId}_err_msg|"></small>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="${descriptionId}" class="form-label">Description:</label>
+                                    <textarea class="form-control" th:id="${descriptionId}"
+                                        placeholder="Enter product description"></textarea>
+                                    <small class="text-danger" th:id="|${descriptionId}_err_msg|"></small>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="${categoryId}" class="form-label">Category:<span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select text-capitalize" th:id="${categoryId}"></select>
+                                    <small class="text-danger" th:id="|${categoryId}_err_msg|"></small>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Unit Type:<span class="text-danger">*</span></label>
+                                    <div class="d-flex gap-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input cursor-pointer" type="radio" name="unit_type"
+                                                th:id="${unitWeightId}" value="WEIGHT" checked>
+                                            <label class="form-check-label" th:for="${unitWeightId}">Per 100g</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input cursor-pointer" type="radio" name="unit_type"
+                                                th:id="${unitPieceId}" value="PIECE">
+                                            <label class="form-check-label" th:for="${unitPieceId}">Per Piece</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="price_input_group">
+                                    <label for="price_input" class="form-label" id="price_label">Price Per 100g:<span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" th:id="${priceId}"
+                                        placeholder="Enter price per 100g" step="1">
+                                    <small class="text-danger" th:id="|${priceId}_err_msg|"></small>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="${imageId}" class="form-label">Product Image:</label>
+                                    <input type="file" class="form-control" th:id="${imageId}">
+                                    <small class="text-danger" th:id="|${imageId}_err_msg|"></small>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input class="form-check-input cursor-pointer" type="checkbox" th:id="${statusId}"
+                                        checked>
+                                    <label class="form-check-label" th:for="${statusId}">In Stock</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="product_form" class="btn btn-primary" id="product_form_submit_btn">
+                        <i class="fa-solid fa-save"></i>&nbsp;Create Product
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

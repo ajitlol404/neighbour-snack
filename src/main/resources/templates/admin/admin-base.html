@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+    <th:block th:fragment="admin_base_navbar">
+        <nav class="navbar navbar-expand-lg bg-primary bg-gradient navbar-dark sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" th:href="@{/admin}">Neighbour Snack (NS) - Admin Panel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="d-flex">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle border border-0" type="button"
+                            id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i>&nbsp;Hi,&nbsp;<span class="fw-bold text-capitalize"
+                                sec:authentication="principal.name"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa-solid fa-user-circle"></i>&nbsp;View Profile
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form id="logout_form" th:action="@{/logout}" method="post">
+                                    <button class="dropdown-item" type="submit">
+                                        <i class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg bg-dark bg-gradient navbar-dark sticky-top z-0">
+            <div class="container-fluid">
+                <a th:href="@{/admin}" class="btn btn-outline-light border border-0">
+                    <i class="fa-solid fa-house"></i>&nbsp;Dashboard
+                </a>
+                <a th:href="@{/admin/category}" class="btn btn-outline-light border border-0">
+                    <i class="fa-solid fa-list"></i>&nbsp;Categories
+                </a>
+                <a th:href="@{/admin/product}" class="btn btn-outline-light border border-0">
+                    <i class="fa-solid fa-box"></i>&nbsp;Products
+                </a>
+                <a th:href="@{/admin/order}" class="btn btn-outline-light border border-0">
+                    <i class="fa-solid fa-cart-shopping"></i>&nbsp;Orders
+                </a>
+                <a th:href="@{/admin/user}" class="btn btn-outline-light border border-0">
+                    <i class="fa-solid fa-user"></i>&nbsp;User
+                </a>
+                <a th:href="@{/admin/setting}" class="btn btn-outline-light border border-0">
+                    <i class="fa-solid fa-gear"></i>&nbsp;Settings
+                </a>
+            </div>
+        </nav>
+    </th:block>
+
+</body>
+
+</html>

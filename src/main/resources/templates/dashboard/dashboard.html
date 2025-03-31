@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{base :: base_head}"></th:block>
+    <script type="module" th:src="@{/javascript/dashboard.js}" defer></script>
+</head>
+
+<body>
+
+    <nav th:replace="~{base :: base_navbar}"></nav>
+
+    <div class="container-fluid my-3">
+        <div class="row mb-3">
+            <div class="col">
+                <select id="sort_options" class="form-select w-auto ms-auto">
+                    <option selected disabled hidden>Sort Options</option>
+                    <option value="0-asc">Price: Low to High</option>
+                    <option value="0-desc">Price: High to Low</option>
+                    <option value="1-asc">Name: A-Z</option>
+                    <option value="1-desc">Name: Z-A</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Categories</h5>
+                    </div>
+                    <div id="category_list" class="list-group list-group-flush">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+
+                <table class="w-100" id="product_table">
+                    <tr class="d-none"> <!-- Hidden header for DataTables -->
+                        <th>Price</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Card</th> <!-- This column will hold our card HTML -->
+                    </tr>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer th:replace="~{base :: base_footer}"></footer>
+
+    <!-- Modal -->
+    <th:block th:replace="~{fragment/toast-fragment :: toast_alert_message}"></th:block>
+
+</body>
+
+</html>

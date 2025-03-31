@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<body>
+
+    <div th:fragment="toast_alert_message"
+        class="toast-container z-2000 p-3 top-0 start-50 translate-middle-x position-fixed"
+        th:if="${alertMessage!=null}">
+        <div class="toast align-items-center border-0" id="toast" role="alert" aria-live="assertive" aria-atomic="true"
+            data-bs-delay="5000"
+            th:classappend="${alertMessage.type.name() == 'SUCCESS' ? 'text-bg-success' : alertMessage.type.name() == 'WARNING' ? 'text-bg-warning' : 'text-bg-danger'}">
+            <div class="d-flex justify-content-center">
+                <div class="toast-body">
+                    <i class="fa-solid"
+                        th:classappend="${alertMessage.type.name() == 'SUCCESS' ? 'fa-circle-check' : alertMessage.type.name() == 'WARNING' ? 'fa-circle-exclamation' : 'fa-circle-xmark'}"></i>
+                    <span th:text="${alertMessage.message}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

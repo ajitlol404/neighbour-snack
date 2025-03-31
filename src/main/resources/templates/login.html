@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <th:block th:replace="~{base :: csrf_meta}"></th:block>
+    <th:block th:replace="~{base :: base_css_js}"></th:block>
+
+    <script type="module" th:src="@{/javascript/login.js}" defer></script>
+    <script type="module" th:src="@{/javascript/signup.js}" defer></script>
+    <script type="module" th:src="@{/javascript/forgot-password.js}" defer></script>
+</head>
+
+<body class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
+                <h1 class="fw-bold m-0"><a th:href="@{/}" class="text-decoration-none">Neighbour Snack</a></h1>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card border border-secondary">
+                    <div class="card-header border-bottom border-secondary">
+                        <h5 class="font-weight-bolder my-1"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Login to
+                            Your
+                            Account</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" th:action="@{/login-process}" id="login_form" autocomplete="off" novalidate
+                            th:with="emailId='login_email', passwordId='login_password', rememberMeId='login_remember_me'">
+                            <div class="mb-3">
+                                <label th:for="${emailId}" class="form-label">Email:</label>
+                                <input type="email" class="form-control" th:id="${emailId}"
+                                    placeholder="Enter your email" name="username">
+                                <small class="text-danger text-sm" th:id="|${emailId}_err_msg|"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="login_password" class="form-label">Password:</label>
+                                <input type="password" class="form-control" id="login_password" name="password"
+                                    placeholder="Enter your password">
+                                <small class="text-danger text-sm" id="login_password_err_msg"></small>
+                            </div>
+                            <div class="mb-3 d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input cursor-pointer" type="checkbox"
+                                        id="login_remember_me" name="remember-me">
+                                    <label class="form-check-label" for="login_remember_me">Remember me</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="login_form_submit_btn"><i
+                                        class="fa-solid fa-right-to-bracket"></i>&nbsp;Login</button>
+                            </div>
+                            <div class="mb-3 d-flex justify-content-between">
+                                <span>Need an account?&nbsp;<a href="#" class="text-decoration-none"
+                                        data-bs-toggle="modal" data-bs-target="#signup_modal">Sign
+                                        Up</a></span>
+                                <a href="#" class="text-decoration-none" data-bs-toggle="modal"
+                                    data-bs-target="#forgot_password_modal">Forgot Password?</a>
+                            </div>
+                        </form>
+                        <div class="d-flex align-items-center my-3">
+                            <hr class="flex-grow-1">
+                            <span class="mx-2 text-muted">OR</span>
+                            <hr class="flex-grow-1">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-danger">
+                                <i class="fa-brands fa-google-plus fa-lg"></i>&nbsp;Login with Google
+                            </button>
+                            <button class="btn btn-primary">
+                                <i class="fa-brands fa-facebook fa-lg"></i>&nbsp;Login with Facebook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <th:block th:replace="~{fragment/modal-fragment :: signup_modal}"></th:block>
+    <th:block th:replace="~{fragment/modal-fragment :: forgot_password_modal}"></th:block>
+    <th:block th:replace="~{fragment/modal-fragment :: privacy_policy_modal}"></th:block>
+    <th:block th:replace="~{fragment/modal-fragment :: terms_conditions_modal}"></th:block>
+
+    <th:block th:replace="~{fragment/toast-fragment :: toast_alert_message}"></th:block>
+
+</body>
+
+</html>
