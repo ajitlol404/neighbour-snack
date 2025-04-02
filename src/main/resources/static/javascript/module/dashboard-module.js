@@ -7,6 +7,7 @@ const categoryList = document.getElementById("category_list");
 const sortOptions = document.getElementById('sort_options')
 const searchInput = document.getElementById("search_input");
 let productTable;
+const CART_KEY = "cart_items";
 
 async function initializeDashboardData() {
     // 1. Show spinner immediately when loading starts
@@ -145,7 +146,7 @@ function initializeProductTable() {
                     contentCol.appendChild(ratingContainer);
 
                     // Add rating stars (assuming generateRatingStars returns HTML string)
-                    ratingContainer.innerHTML = generateRatingStars(row.rating || 0);
+                    ratingContainer.appendChild(generateRatingStars(row.rating || 0));
 
                     // Add review count
                     const reviewCount = document.createElement("span");
@@ -161,6 +162,7 @@ function initializeProductTable() {
                     // Create Add to Cart button (outline with icon)
                     const addToCartBtn = document.createElement("button");
                     addToCartBtn.className = "btn btn-outline-primary btn-sm";
+                    addToCartBtn.disabled = !row.inStock;
 
                     // Create cart icon
                     const cartIcon = document.createElement("i");
@@ -206,12 +208,9 @@ function handleProductSorting() {
 }
 
 function handleProductSearch() {
-    if (!productTable) {
-        console.error("DataTable not initialized!");
-        return;
-    }
+    if (!productTable) return;
 
-    const searchTerm = document.getElementById('search_input').value.trim();
+    const searchTerm = searchInput.value.trim();
     productTable.search(searchTerm).draw();
 }
 
@@ -232,25 +231,29 @@ function handleCategoryFilter(e) {
         productTable.column(2).search(category).draw();
     }
 }
-// Helper function for rating stars
+
 function generateRatingStars(rating) {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    let stars = '';
+    // Ensure rating is an integer between 0 and 5
+    const validatedRating = Math.max(0, Math.min(5, Math.floor(rating)));
 
-    for (let i = 0; i < fullStars; i++) {
-        stars += '<i class="fas fa-star text-warning"></i>';
-    }
-    if (hasHalfStar) {
-        stars += '<i class="fas fa-star-half-alt text-warning"></i>';
-    }
-    for (let i = 0; i < 5 - Math.ceil(rating); i++) {
-        stars += '<i class="far fa-star text-warning"></i>';
+    // Create a container element
+    const starContainer = document.createElement("span");
+
+    // Add full stars
+    for (let i = 0; i < validatedRating; i++) {
+        const star = document.createElement("i");
+        star.classList.add("fas", "fa-star", "text-warning"); // Full star
+        starContainer.appendChild(star);
     }
 
-    return stars;
+    // Add empty stars
+    for (let i = 0; i < 5 - validatedRating; i++) {
+        const star = document.createElement("i");
+        star.classList.add("far", "fa-star", "text-warning"); // Empty star
+        starContainer.appendChild(star);
+    }
+    return starContainer;
 }
-
 
 export {
     handleProductSearch, handleProductSorting, initializeDashboardData, initializeProductTable, handleCategoryFilter,
