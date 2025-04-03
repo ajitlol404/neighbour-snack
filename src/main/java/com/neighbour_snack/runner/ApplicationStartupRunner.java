@@ -24,15 +24,12 @@ public class ApplicationStartupRunner implements CommandLineRunner {
     private final UserService userService;
     private final SystemSettingService systemSettingService;
 
-
     private static final List<String> SMTP_SETTINGS_KEYS = List.of(
             SMTP_HOST_KEY,
             SMTP_PORT_KEY,
             SMTP_IS_SSL_KEY,
             SMTP_USERNAME_KEY,
-            SMTP_PASSWORD_KEY,
-            SMTP_STATUS_KEY
-    );
+            SMTP_PASSWORD_KEY);
 
     @Override
     public void run(String... args) throws Exception {
@@ -55,14 +52,16 @@ public class ApplicationStartupRunner implements CommandLineRunner {
     }
 
     private void initializeAppVersion() {
-        initializeSystemSetting(APPLICATION_VERSION_KEY, APPLICATION_VERSION, SystemSetting.SystemSettingCategory.APP_VERSION);
+        initializeSystemSetting(APPLICATION_VERSION_KEY, APPLICATION_VERSION,
+                SystemSetting.SystemSettingCategory.APP_VERSION);
     }
 
     private void initializeSystemSetting(String key) {
         initializeSystemSetting(key, null, SystemSetting.SystemSettingCategory.SMTP);
     }
 
-    private void initializeSystemSetting(String key, String defaultValue, SystemSetting.SystemSettingCategory category) {
+    private void initializeSystemSetting(String key, String defaultValue,
+            SystemSetting.SystemSettingCategory category) {
         try {
             systemSettingService.getSystemSettingByKey(key);
             logger.info("System setting '{}' already exists.", key);

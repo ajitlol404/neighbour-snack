@@ -29,4 +29,10 @@ public class AdminController {
         return "admin/product";
     }
 
+    @GetMapping("/setting")
+    public String setting(Model model) {
+        model.addAttribute("title", "NS - Setting");
+        return "admin/setting";
+    }
+
 }

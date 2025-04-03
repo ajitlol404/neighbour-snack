@@ -1,7 +1,5 @@
 package com.neighbour_snack.security;
 
-import static com.neighbour_snack.constant.AppConstant.SIGN_UP_BASE_URL;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class SecurityConfiguration {
 
         // Public API endpoints
         private static final String[] PUBLIC_API_ENDPOINTS = {
-                        "/", SIGN_UP_BASE_URL, "/categories", "/products", "/products/*/images"
+                        "/", "/signup", "/categories", "/products", "/products/*/images"
         };
 
         private final UserRepository userRepository;

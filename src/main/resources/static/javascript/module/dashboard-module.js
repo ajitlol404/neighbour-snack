@@ -62,6 +62,7 @@ function initializeProductTable() {
     productTable = new DataTable("#product_table", {
         ...DATATABLE_DEFAULT_OPTIONS,
         "dom": 'rt<"d-flex align-items-center justify-content-between"ip>',
+        "order": [], // No default sorting
         "ajax": {
             ...DATATABLE_DEFAULT_OPTIONS.ajax,
             "url": "/products",
