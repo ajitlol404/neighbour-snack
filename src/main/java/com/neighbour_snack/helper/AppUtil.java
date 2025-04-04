@@ -1,15 +1,8 @@
 package com.neighbour_snack.helper;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.text.Normalizer;
+import java.util.Base64;
 import java.util.Random;
-
-import org.springframework.web.multipart.MultipartFile;
 
 public class AppUtil {
 
@@ -23,28 +16,13 @@ public class AppUtil {
         return random.nextInt(900000) + 100000;
     }
 
-    public static String saveFile(String uploadDir, String fileName, MultipartFile file) throws IOException {
+    public static String encode(String input) {
+        return Base64.getEncoder().encodeToString(input.getBytes());
+    }
 
-        Path uploadPath = Paths.get(uploadDir);
-
-        if (!(Files.exists(uploadPath))) {
-            Files.createDirectories(uploadPath);
-        }
-
-        String fileCode = String.valueOf(generate6DigitRandomNumber());
-
-        String finalImageName = fileCode + "-" + fileName;
-
-        try (InputStream inputStream = file.getInputStream()) {
-            Path filePath = uploadPath.resolve(finalImageName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING); // Override existing file with same
-            // name
-        } catch (IOException e) {
-            throw new IOException("Could not save file : " + fileName, e);
-        }
-
-        return finalImageName;
-
+    // Method to decode a string
+    public static String decode(String encoded) {
+        return new String(Base64.getDecoder().decode(encoded));
     }
 
     public static String normalizeName(String name) {

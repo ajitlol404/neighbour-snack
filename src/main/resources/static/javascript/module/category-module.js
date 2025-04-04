@@ -215,8 +215,6 @@ async function handleDeleteCategory(categoryId) {
 }
 
 async function handleCategoryFormSubmit() {
-    const isCategoryNameValid = validateCategoryName();
-    const isCategoryDescriptionValid = validateCategoryDescription();
 
     if (!validateCategoryName() || !validateCategoryDescription()) return;
 

@@ -4,7 +4,8 @@ import { deleteRequest, getRequest, patchRequest, patchUploadFile, postRequest, 
 const BASE_URLS = {
     SIGN_UP: "/auth/signup",
     CATEGORY: "/admin/categories",
-    PRODUCT: "/admin/products"
+    PRODUCT: "/admin/products",
+    SMTP: "/admin/smtp"
 };
 
 // Authentication
@@ -33,6 +34,11 @@ const ProductAPI = {
     deleteProductByUuid: (uuid) => deleteRequest(`${BASE_URLS.PRODUCT}/${uuid}`)
 };
 
+const SmtpAPI = {
+    getSmtp: () => getRequest(BASE_URLS.SMTP),
+    updateSmtp: (body) => putRequest(BASE_URLS.SMTP, body)
+};
+
 export {
-    BASE_URLS, AuthAPI, CategoryAPI, ProductAPI
+    BASE_URLS, AuthAPI, CategoryAPI, ProductAPI, SmtpAPI
 }

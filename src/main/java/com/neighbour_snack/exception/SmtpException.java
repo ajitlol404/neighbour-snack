@@ -15,4 +15,3 @@ public class SmtpException extends RuntimeException {
         super(message, cause);
     }
 }
-

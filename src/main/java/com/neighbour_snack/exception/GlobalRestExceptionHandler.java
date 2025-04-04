@@ -4,11 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -25,6 +27,13 @@ public class GlobalRestExceptionHandler {
         logger.warn("NoSuchElementException occurred", nsee);
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND,
                 nsee.getLocalizedMessage());
+    }
+
+    @ExceptionHandler(SmtpException.class)
+    public ProblemDetail handleSmtpException(SmtpException se) {
+        logger.warn("SmtpException occurred", se);
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,
+                se.getLocalizedMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -47,6 +56,15 @@ public class GlobalRestExceptionHandler {
         // .collect(Collectors.toMap(FieldError::getField,
         // FieldError::getDefaultMessage)));
 
+        return problemDetail;
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ProblemDetail handleAuthenticationException(AuthenticationException ae) {
+        logger.warn("AuthenticationException occurred", ae);
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED,
+                ae.getLocalizedMessage());
+        problemDetail.setProperty("timestamp", ZonedDateTime.now());
         return problemDetail;
     }
 

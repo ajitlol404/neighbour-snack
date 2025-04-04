@@ -164,6 +164,7 @@ function initializeProductTable() {
                     const addToCartBtn = document.createElement("button");
                     addToCartBtn.className = "btn btn-outline-primary btn-sm";
                     addToCartBtn.disabled = !row.inStock;
+                    addToCartBtn.addEventListener("click", () => handleAddToCartClick(row))
 
                     // Create cart icon
                     const cartIcon = document.createElement("i");
@@ -180,8 +181,9 @@ function initializeProductTable() {
                     const wishlistBtn = document.createElement("button");
                     wishlistBtn.className = "btn btn-outline-danger btn-sm ms-1";
                     const heartIcon = document.createElement("i");
-                    heartIcon.className = "fas fa-heart";
+                    heartIcon.className = "fa-regular fa-heart";
                     wishlistBtn.appendChild(heartIcon);
+                    wishlistBtn.addEventListener("click", () => handleFavoriteClick(row));
                     btnContainer.appendChild(wishlistBtn);
 
                     // Return the outer container
@@ -254,6 +256,28 @@ function generateRatingStars(rating) {
         starContainer.appendChild(star);
     }
     return starContainer;
+}
+
+function handleAddToCartClick(row) {
+
+    const authStatus = document.getElementById("auth_status");
+    const isAuthenticated = authStatus.dataset.isauthenticated === "true";
+
+    if (!isAuthenticated) {
+        Toast.warning("Please login to add items to cart");
+        return;
+    }
+}
+
+function handleFavoriteClick(row) {
+
+    const authStatus = document.getElementById("auth_status");
+    const isAuthenticated = authStatus.dataset.isauthenticated === "true";
+
+    if (!isAuthenticated) {
+        Toast.warning("Please login to add items to your favorites");
+        return;
+    }
 }
 
 export {
